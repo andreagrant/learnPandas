@@ -48,7 +48,7 @@ cleanTZ=frame['tz'].fillna('Missing')
 cleanTZ[cleanTZ=='']='Unknown'
 tzCounts=cleanTZ.value_counts()
 
-tzCounts[:10].plot(kind='barh',rot=0)
+#tzCounts[:10].plot(kind='barh',rot=0)
 
 #%%
 results=pandas.Series([x.split()[0] for x in frame.a.dropna()])
@@ -67,7 +67,7 @@ indexer[:10]
 countSubset=aggCounts.take(indexer)[-10:]
 countSubset
 
-countSubset.plot(kind='barh',stacked=True)
+#countSubset.plot(kind='barh',stacked=True)
 
 normedSubset=countSubset.div(countSubset.sum(1), axis=0)
-normedSubset.plot(kind='barh',stacked=True)
+normedSubset.plot(kind='bar',stacked=True)
