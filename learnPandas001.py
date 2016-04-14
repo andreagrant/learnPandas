@@ -70,4 +70,13 @@ countSubset
 #countSubset.plot(kind='barh',stacked=True)
 
 normedSubset=countSubset.div(countSubset.sum(1), axis=0)
-normedSubset.plot(kind='bar',stacked=True)
+normedSubset.plot(kind='barh',stacked=True)
+
+#%%
+import os
+import pandas
+
+userNames=['userID','gender','age','occupation','zip']
+moviePath=path='/users/agrant/Documents/UMN/python/pandas/pydata-book/ch02/movielens/'
+thisFile=os.path.join(moviePath,'users.dat')
+users=pandas.read_table(thisFile,sep='::',header=None, names=userNames)
