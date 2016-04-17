@@ -77,6 +77,13 @@ import os
 import pandas
 
 userNames=['userID','gender','age','occupation','zip']
-moviePath=path='/users/agrant/Documents/UMN/python/pandas/pydata-book/ch02/movielens/'
+#moviePath=path='/users/agrant/Documents/UMN/python/pandas/pydata-book/ch02/movielens/'
+moviePath=path='/Users/agrant/codes/learnPandas/pydata-book/ch02/movielens/'
 thisFile=os.path.join(moviePath,'users.dat')
 users=pandas.read_table(thisFile,sep='::',header=None, names=userNames)
+raterNames=['user_id','movie_id','rating','timestamp']
+thisFile=os.path.join(moviePath,'ratings.dat')
+ratings=pandas.read_table(thisFile,sep='::',header=None,names=raterNames)
+movieNames=['movie_id','title','genres']
+thisFile=os.path.join(moviePath,'movies.dat')
+ratings=pandas.read_table(thisFile,sep='::',header=None,names=movieNames)
