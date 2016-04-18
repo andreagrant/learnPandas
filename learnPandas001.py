@@ -77,13 +77,36 @@ import os
 import pandas
 
 userNames=['userID','gender','age','occupation','zip']
-#moviePath=path='/users/agrant/Documents/UMN/python/pandas/pydata-book/ch02/movielens/'
-moviePath=path='/Users/agrant/codes/learnPandas/pydata-book/ch02/movielens/'
+moviePath=path='/users/agrant/Documents/UMN/python/pandas/pydata-book/ch02/movielens/'
+#moviePath=path='/Users/agrant/codes/learnPandas/pydata-book/ch02/movielens/'
 thisFile=os.path.join(moviePath,'users.dat')
-users=pandas.read_table(thisFile,sep='::',header=None, names=userNames)
-raterNames=['user_id','movie_id','rating','timestamp']
+users=pandas.read_table(thisFile,sep='::',header=None, names=userNames,engine='python')
+raterNames=['userID','movieID','rating','timestamp']
 thisFile=os.path.join(moviePath,'ratings.dat')
-ratings=pandas.read_table(thisFile,sep='::',header=None,names=raterNames)
-movieNames=['movie_id','title','genres']
+ratings=pandas.read_table(thisFile,sep='::',header=None,names=raterNames,engine='python')
+movieNames=['movieID','title','genres']
 thisFile=os.path.join(moviePath,'movies.dat')
-ratings=pandas.read_table(thisFile,sep='::',header=None,names=movieNames)
+movies=pandas.read_table(thisFile,sep='::',header=None,names=movieNames,engine='python')
+
+#%%
+users[:5]
+ratings[:5]
+movies[:5]
+ratings
+
+
+#%%
+#nested merge: first merge ratings+users, then merge that with movies
+#pandas does the smart thing since the columns are labelled
+
+data=pandas.merge(pandas.merge(ratings,users),movies)
+
+#look at first row
+data.ix[0]
+
+#to get mean ratings for each film grouped by gender, use the "pivot table"
+#meanRatings=data.pivot_table('rating',rows='title',cols='gender',aggfunc='mean')
+#old keywords
+meanRatings=data.pivot_table('rating',index='title',columns='gender',aggfunc='mean')
+
+#AAAAAAAHHHH this is what i probably needed for the map plot!
