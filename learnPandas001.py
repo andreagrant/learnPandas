@@ -110,3 +110,21 @@ data.ix[0]
 meanRatings=data.pivot_table('rating',index='title',columns='gender',aggfunc='mean')
 
 #AAAAAAAHHHH this is what i probably needed for the map plot!
+
+meanRatings[:5]
+#%%
+#now filter to include only movies with over N ratings
+#group by title to get the "size" (# of ratings) of each
+ratingsXtitle=data.groupby('title').size()
+ratingsXtitle[:10]
+
+activeTitles=ratingsXtitle.index[ratingsXtitle>=250]
+activeTitles
+
+#now use this to select the rows from meanRatings
+meanRatings=meanRatings.ix[activeTitles]
+meanRatings
+
+#top films among female viewers
+topFemaleRatings=meanRatings.sort_index(by='F',ascending=False)
+topFemaleRatings[:10]
